@@ -13,18 +13,8 @@
 
 Route::get('/', function () {
     return view('welcome');
-})->name('home');
+});
 
-Route::get('/test1', function() {
-    echo "Test 1";
-})->name('admin.user.index');
+Auth::routes(['verify' => true]);
 
-
-Route::get('/test2', function() {
-    echo "Test 1";
-})->name('admin.menu.index');
-
-
-Route::get('/test3', function() {
-    echo "Test 1";
-})->name('admin.role.index');
+Route::get('/home', 'HomeController@index')->name('home');
