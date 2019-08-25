@@ -10,3 +10,13 @@ Ini merupakan custom laravel package yang telah tersusun dan terstandarisasi.
 5. Mulai Konfigurasi yang diperlukan pada file `core/Config/fanrbac.php` ;
 6. Jalankan perintah `php artisan db:seed`;
 7. Selesai.
+
+## Fitur
+1. Authorization Scaffolding
+2. RBAC (Role Base Account Control)
+3. Panel Menu Generator
+4. DataTables Generator (Yajra/DataTables)
+5. Laravel DebugBar
+6. **(Coming Soon)** User Management
+7. **(Coming Soon)** Role Management
+8. **(Coming Soon)** Menu Management
