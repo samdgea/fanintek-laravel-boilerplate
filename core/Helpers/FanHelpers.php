@@ -33,12 +33,20 @@ if (!function_exists('buildMenu')) {
 
                 $sidebar->submenu(Link::subMenuRender($menu), function(Menu $spatieMenu) use ($menu) {
                 foreach($menu['children'] as $child) {
-                    $spatieMenu->add(Link::fanRender($child));
+                    $roles = json_decode($menu['granted_to'])->roles;
+                    $roles[] = config('fanrbac.super_admin');
+
+                    $access = auth()->user()->hasRole($roles);
+                    $spatieMenu->addIf($access, Link::fanRender($child));
                 }
                 $spatieMenu->addClass('treeview-menu')->addParentClass('treeview');
                 });
             } else {
-                $sidebar->add(Link::fanRender($menu));
+                $roles = json_decode($menu['granted_to'])->roles;
+                $roles[] = config('fanrbac.super_admin');
+                
+                $access = auth()->user()->hasRole($roles);
+                $sidebar->addIf($access, Link::fanRender($menu));
             }
         }
 
