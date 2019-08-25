@@ -37,4 +37,19 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the user's full name.
+     *
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+    public function isSuperAdministrator() 
+    {
+        return (config('fanrbac.super_admin') !== null) ? $this->hasRole(config('fanrbac.super_admin')) : false;
+    }
 }

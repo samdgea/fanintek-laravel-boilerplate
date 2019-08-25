@@ -1,6 +1,6 @@
 <?php
 
-namespace FanintekFantasena\Http\Controllers\Auth;
+namespace Fanintek\Fantasena\Http\Controllers\Auth;
 
 use Fanintek\Fantasena\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\VerifiesEmails;

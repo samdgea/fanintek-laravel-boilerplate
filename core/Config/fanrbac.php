@@ -12,71 +12,53 @@ return [
         'Staff',
         'Employee'
     ],
-    'super_admin' => 'Administrator', // Set to null if you did not want any roles have all access to routes
+    'super_admin' => 'Administrator', // Set to null if you did not want any roles have all access to routes,
+    'allowed_role_access_admin_menu' => [
+        'Staff'
+    ],
     'menus' => [
+        /**
+         * For this time menu generator only support 1 child menu
+         */
         [
             'label' => 'Dashboard',
-            'route' => 'home',
-            'icon'  => 'dashboard',
+            'type' => 'ROUTE_NAME', // menus type must be ROUTE_NAME, ROUTE_ACTION, or URL
+            'data' => 'home', // put route link ex: HomeController@index (if you choose ROUTE_ACTION), admin.user.index (if you choose ROUTE_NAME), or link (if you choose URL)
+            'icon' => 'fa fa-dashboard', // you could use font-awesome or Ionicons
             'granted_to' => [
                 'roles' => [
                     'Staff',
                     'Employee'
-                ], 
-                'users' => [
-                    // 'ask@abdilah.id'
-                ]
-            ], // You can configure later in Menu Management on the app
-        ],
-        [
-            'label' => 'Administrative Menu',
-            'url' => '#',
-            'icon' => 'cogs',
+                ],
+                'users' => []
+            ]
+        ], [
+            'label' => 'Administative Menu',
+            'type' => 'URL',
+            'data' => '#',
+            'icon' => 'fa fa-cogs',
+            'granted_to' => [
+                'roles' => [
+                    'staff'
+                ],
+                'users' => []
+            ],
             'children' => [
                 [
                     'label' => 'User Management',
-                    'route' => 'admin.user.index',
-                    'icon' => 'users', 
-                    'granted_to' => [
-                        'roles' => [
-                            'Staff'
-                        ], 
-                        'users' => [
-                            // 'ask@abdilah.id'
-                        ]
-                    ]
+                    'type' => 'URL',
+                    'data' => '#user-management',
+                    'icon' => 'fa fa-circle-o',
+                ], [
+                    'label' => 'Role Management',
+                    'type' => 'URL',
+                    'data' => '#role-management',
+                    'icon' => 'fa fa-circle-o'
                 ], [
                     'label' => 'Menu Management',
-                    'route' => 'admin.menu.index',
-                    'icon' => 'tags',
-                    'granted_to' => [
-                        'roles' => [
-                            'Staff'
-                        ], 
-                        'users' => [
-                            // 'ask@abdilah.id'
-                        ]
-                    ]
-                ], [
-                    'label' => 'Roles Management',
-                    'route' => 'admin.role.index',
-                    'icon' => 'users',
-                    'granted_to' => [
-                        'roles' => [
-                            'Staff'
-                        ], 
-                        'users' => [
-                            // 'ask@abdilah.id'
-                        ]
-                    ]
-                ]
-            ],
-            'granted_to' => [
-                'roles' => [
-                    'Staff'
-                ], 
-                'users' => [
-                    // 'ask@abdilah.id'
+                    'type' => 'URL',
+                    'data' => '#menu-management',
+                    'icon' => 'fa fa-circle-o'
                 ]
             ]
         ]

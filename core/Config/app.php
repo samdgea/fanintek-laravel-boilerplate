@@ -175,6 +175,9 @@ return [
         Fanintek\Fantasena\Providers\EventServiceProvider::class,
         Fanintek\Fantasena\Providers\RouteServiceProvider::class,
 
+        // Menu Providers
+        Fanintek\Fantasena\Providers\SidebarMenuProvider::class,
+
     ],
 
     /*

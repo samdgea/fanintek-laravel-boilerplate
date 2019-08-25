@@ -9,6 +9,6 @@ class FanMenu extends Model
     protected $table = 'menus';
 
     protected $fillable = [
-        'parent_id', 'menu_label', 'menu_url', 'menu_route', 'menu_icon', 'granted_to'
+        'parent_id', 'menu_label', 'menu_link_type', 'menu_data', 'menu_icon', 'granted_to'
     ];
 }

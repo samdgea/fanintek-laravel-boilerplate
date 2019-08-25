@@ -17,10 +17,10 @@ class CreateMenusTables extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('parent_id')->nullable();
             $table->string('menu_label', 50);
-            $table->string('menu_url')->nullable();
-            $table->string('menu_route')->nullable();
+            $table->enum('menu_link_type', ['ROUTE_NAME', 'ROUTE_ACTION', 'URL'])->default('ROUTE_NAME');
+            $table->string('menu_data');
             $table->string('menu_icon')->nullable();
-            $table->json('granted_to')->nullable();
+            $table->json('granted_to');//->default(json_encode(['roles' => [], 'users' => []]));
             $table->timestamps();
         });
     }

@@ -1,8 +1,4 @@
 <?php
-use Illuminate\Support\Facades\Route;
-
-use Fanintek\Fantasena\Models\FanMenu;
-
 use Spatie\Menu\Laravel\Menu;
 use Spatie\Menu\Laravel\Link;
 
@@ -28,36 +24,24 @@ if (!function_exists('buildTree')) {
     }
 }
 
-if (!function_exists('generate_menu')) {
-    function generate_menu() {
-        $menus = buildTree(FanMenu::all()->toArray());
+if (!function_exists('buildMenu')) {
+    function buildMenu(array $menuItems) {
+        $sidebar = Menu::new()->addClass('sidebar-menu')->setAttributes(['data-widget' => 'tree']);
+    
+        foreach ($menuItems as $menu) {
+            if (array_key_exists('children', $menu)) {
 
-        return Menu::build($menus, function($menu, $link) {
-            if (array_key_exists('children', $link)) {
-                // Dropdown
-                $menu->subMenu($link['menu_label'], 
-                    Menu::build($link['children'], function($menu, $link) {
-                        if (!empty($link['menu_url'])) {
-                            $linkx = Link::toUrl($link['menu_url'], $link['menu_label']);
-                        } else {
-                            $linkx = Link::toRoute($link['menu_route'], $link['menu_label']);
-                        }
-                        
-                        $isAllowed = (auth()->user()->hasAnyRole(json_decode($link['granted_to'])->roles) || (config('fanrbac.super_admin') !== null) ? auth()->user()->hasRole(config('fanrbac.super_admin')) : false );
-
-                        $menu->addIf($isAllowed, $linkx);
-                    })
-                );
-                
-            } else {
-                if (!empty($link['menu_url'])) {
-                    $linkx = Link::toUrl($link['menu_url'], $link['menu_label']);
-                } else {
-                    $linkx = Link::toRoute($link['menu_route'], $link['menu_label']);
+                $sidebar->submenu(Link::subMenuRender($menu), function(Menu $spatieMenu) use ($menu) {
+                foreach($menu['children'] as $child) {
+                    $spatieMenu->add(Link::fanRender($child));
                 }
-                $isAllowed = (auth()->user()->hasAnyRole(json_decode($link['granted_to'])->roles) || (config('fanrbac.super_admin') !== null) ? auth()->user()->hasRole(config('fanrbac.super_admin')) : false );
-                $menu->addIf($isAllowed, $linkx);
+                $spatieMenu->addClass('treeview-menu')->addParentClass('treeview');
+                });
+            } else {
+                $sidebar->add(Link::fanRender($menu));
             }
-        })->render();
+        }
+
+        return $sidebar->setActiveFromRequest()->render();
     }
 }
