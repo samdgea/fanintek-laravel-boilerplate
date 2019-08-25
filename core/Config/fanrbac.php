@@ -12,6 +12,8 @@ return [
         'Staff',
         'Employee'
     ],
+    'allow_new_registration' => false,
+    'new_user_default_role' => 'Employee',
     'super_admin' => 'Administrator', // Set to null if you did not want any roles have all access to routes,
     'allowed_role_access_admin_menu' => [
         'Staff'
