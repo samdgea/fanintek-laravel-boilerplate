@@ -6,6 +6,8 @@ use Fanintek\Fantasena\Http\Controllers\Controller;
 use Fanintek\Fantasena\Models\User;
 use Illuminate\Http\Request;
 
+use DataTables;
+
 class UserManageController extends Controller
 {
 
@@ -14,6 +16,26 @@ class UserManageController extends Controller
     public function __construct(User $model) 
     {
         $this->model = $model;
+    }
+
+    /**
+     * Collect user list into DataTables JSON
+     */
+    public function userJson(Request $request)
+    {
+        return DataTables::of($this->model->all())
+                ->addColumn('full_name', function($row) {
+                    return "{$row->first_name} {$row->last_name}";
+                })
+                ->editColumn('is_active', function($row) {
+                    return $row->is_active == true ? 'Active' : 'Deactive';
+                })
+                ->editColumn('created_at', function($row) {
+                    return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at)->format('d F Y H:i:s');
+                })
+                ->addColumn('action', function ($user) {
+                    return '<a href="javascript:void(0);" data-toggle="modal" data-target="#editModal" data-userId="'.$user->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                })->make(true);
     }
 
     /**

@@ -13,7 +13,8 @@
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "spatie/laravel-menu": "^3.3",
-        "spatie/laravel-permission": "^2.37"
+        "spatie/laravel-permission": "^2.37",
+        "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
