@@ -126,7 +126,7 @@ class RoleManageController extends Controller
 
             return view('admin.role.edit', compact('detailRole', 'formRole'));
         } else {
-            return redirect()->back()->with('splash-type', 'danger')->with('splash-message', 'User was not found!');
+            return redirect()->back()->with('splash-type', 'danger')->with('splash-message', 'Role was not found!');
         }
     }
 

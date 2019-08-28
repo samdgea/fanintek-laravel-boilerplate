@@ -25,4 +25,16 @@ Route::group([], function() {
         Route::match(['get', 'post'], 'edit/{id}', 'RoleManageController@edit')->name('edit');
         Route::match(['get', 'post'], 'create', 'RoleManageController@create')->name('create');
     });
+
+    Route::group(['prefix' => 'menu', 'as' => 'menu.'], function () {
+        Route::group(['prefix' => 'json', 'as' => 'json.'], function () {
+            Route::get('allMenu', 'MenuManageController@menuJson')->name('allMenu');
+            Route::post('deleteMenu', 'MenuManageController@delete')->name('deleteMenu');
+        });
+
+        Route::get('/', 'MenuManageController@index')->name('index');
+        Route::get('view/{id}', 'MenuManageController@view')->name('view');
+        Route::match(['get', 'post'], 'edit/{id}', 'MenuManageController@edit')->name('edit');
+        Route::match(['get', 'post'], 'create', 'MenuManageController@create')->name('create');
+    });
 });
