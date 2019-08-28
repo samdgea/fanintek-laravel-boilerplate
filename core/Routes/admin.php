@@ -13,4 +13,16 @@ Route::group([], function() {
         Route::match(['get', 'post'], 'create', 'UserManageController@create')->name('create');
         Route::post('changePassword/{id}', 'UserManageController@changePassword')->name('changePassword');
     });
+
+    Route::group(['prefix' => 'role', 'as' => 'role.'], function () {
+        Route::group(['prefix' => 'json', 'as' => 'json.'], function () {
+            Route::get('allRole', 'RoleManageController@roleJson')->name('allRole');
+            Route::post('deleteRole', 'RoleManageController@delete')->name('deleteRole');
+        });
+
+        Route::get('/', 'RoleManageController@index')->name('index');
+        Route::get('view/{id}', 'RoleManageController@view')->name('view');
+        Route::match(['get', 'post'], 'edit/{id}', 'RoleManageController@edit')->name('edit');
+        Route::match(['get', 'post'], 'create', 'RoleManageController@create')->name('create');
+    });
 });

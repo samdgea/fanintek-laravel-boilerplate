@@ -18,6 +18,6 @@ Ini merupakan custom laravel package yang telah tersusun dan terstandarisasi.
 3. Panel Menu Generator
 4. DataTables Generator (Yajra/DataTables)
 5. Laravel DebugBar
-6. **(Coming Soon)** User Management
-7. **(Coming Soon)** Role Management
+6. User Management
+7. Role Management
 8. **(Coming Soon)** Menu Management

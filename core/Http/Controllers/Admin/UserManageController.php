@@ -63,6 +63,9 @@ class UserManageController extends Controller
 
         if ($request->isMethod('POST')) 
         {
+            if (!$form->isValid())
+                return redirect()->back()->withErrors($form->getErrors())->withInput();
+                
             $data = $form->getFieldValues();
 
             $user = $this->model->create([
