@@ -80,8 +80,8 @@
         <h3 class="box-title">User Management</h3>    
         <a href="{{ route('manage.user.create') }}" class="btn btn-xs btn-success pull-right"><i class="fa fa-user-plus"></i> New User</a>
     </div>
-    <div class="box-body">
-        <table class="table table-bordered" id="userTable">
+    <div class="box-body table-responsive">
+        <table class="table table-bordered" id="userTable" style="width:100%">
             <thead>
                 <tr>
                     <th>ID</th>

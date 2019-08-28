@@ -81,8 +81,8 @@
         <h3 class="box-title">Menu Management</h3>    
         <a href="{{ route('manage.menu.create') }}" class="btn btn-xs btn-success pull-right"><i class="fa fa-plus"></i> New Menu</a>
     </div>
-    <div class="box-body">
-        <table class="table table-bordered" id="menuTable">
+    <div class="box-body table-responsive">
+        <table class="table table-bordered" id="menuTable" style="width:100%">
             <thead>
                 <tr>
                     <th>ID</th>
