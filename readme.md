@@ -20,4 +20,4 @@ Ini merupakan custom laravel package yang telah tersusun dan terstandarisasi.
 5. Laravel DebugBar
 6. User Management
 7. Role Management
-8. **(Coming Soon)** Menu Management
+8. Menu Management
