@@ -29,7 +29,7 @@
             let t = $('#userTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route("manage.user.getJson") }}',
+                ajax: '{{ route("manage.user.json.allUser") }}',
                 columns: [
                     { data: 'id', name: 'id' },
                     { data: 'full_name', name: 'full_name' },
@@ -52,6 +52,24 @@
                 } );
             } ).draw();
 
+            $('#editModal').on('show.bs.modal', function(e) {
+                var button = $(e.relatedTarget);
+                var id = button.data('userid');
+
+                window.location.href= "/{{ request()->path() }}/edit/" + id;
+            });
+
+            $('#viewModal').on('show.bs.modal', function(e) {
+                var button = $(e.relatedTarget);
+                var id = button.data('userid');
+
+                window.location.href= "/{{ request()->path() }}/view/" + id;
+            });
+
+            $('#deleteModal').on('show.bs.modal', function(e) {
+                var id = $(e.relatedTarget).data('userid');
+                $('#deleteForm').children('input#uID').val(id);
+            })
         });
     </script>
 @endpush
@@ -60,6 +78,7 @@
 <div class="box">
     <div class="box-header with-border">
         <h3 class="box-title">User Management</h3>    
+        <a href="{{ route('manage.user.create') }}" class="btn btn-xs btn-success pull-right"><i class="fa fa-user-plus"></i> New User</a>
     </div>
     <div class="box-body">
         <table class="table table-bordered" id="userTable">
@@ -70,13 +89,28 @@
                     <th>Email</th>
                     <th>Account Active</th>
                     <th>Account Creation</th>
-                    <th>Action</th>
+                    <th class="table-action">Action</th>
                 </tr>
             </thead>
         </table>
     </div>
 </div>
 <!-- /.box -->
+
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="viewModalLabel">View User</h4>
+            </div>
+            <div class="modal-body text-center">
+                <i class="fa fa-refresh fa-spin fa-5x fa-fw"></i>
+                <p class="modal-message">Redirecting</p>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel">
     <div class="modal-dialog" role="document">
@@ -85,39 +119,33 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="editModalLabel">Edit User</h4>
             </div>
-            <div class="modal-body">
-                <form>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="first_name" class="control-label">First Name :</label>
-                            <input type="text" class="form-control" id="first_name" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="last_name" class="control-label">Last Name:</label>
-                            <input type="text" class="form-control" id="last_name">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <label for="email" class="control-label">Email Address :</label>
-                            <input type="email" class="form-control" id="email" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="new_password" class="control-label">New Password :</label>
-                            <input type="password" class="form-control" id="new_password">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="new_password_confirm" class="control-label">Re-Type New Password :</label>
-                            <input type="password" class="form-control" id="new_password_confirm">
-                        </div>
-                    </div>
-                </form>
+            <div class="modal-body text-center">
+                <i class="fa fa-refresh fa-spin fa-5x fa-fw"></i>
+                <p class="modal-message">Redirecting</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal-danger" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="deleteModalLabel">Delete User</h4>
+            </div>
+            <div class="modal-body text-center" id="formDelete">
+                <i class="fa fa-exclamation-triangle fa-4x"></i>
+                <p class="modal-message">Are you sure to delete this user ? Your action can not be undone!</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <form method="POST" id="deleteForm" action="{{ route('manage.user.json.deleteUser') }}">
+                    @csrf
+                    <input type="hidden" name="id" id="uID" value="0">
+
+                    <a class="btn btn-default" data-dismiss="modal">Close</a>
+                    <button type="submit" class="btn btn-danger okay">Yes, delete it</button>    
+                </form>
             </div>
         </div>
     </div>

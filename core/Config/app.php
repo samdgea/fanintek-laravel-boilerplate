@@ -229,7 +229,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-
+        'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class
     ],
 
 ];

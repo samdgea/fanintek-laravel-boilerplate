@@ -1,0 +1,12 @@
+.table-action {
+    text-align: center;
+    width: 160px;
+}
+
+div.modal-body p.modal-message {
+    font-size: 18px;
+}
+
+button.btn.btn-danger.okay {
+    border: solid 1.5px;
+}

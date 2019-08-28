@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Console\Command;
 
 use Spatie\Permission\Models\Role;
+use Fanintek\Fantasena\Models\User;
 
 class AssignUserRoleSeeder extends Seeder
 {

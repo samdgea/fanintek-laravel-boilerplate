@@ -7,9 +7,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasRoles, Notifiable;
+    use HasRoles, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
