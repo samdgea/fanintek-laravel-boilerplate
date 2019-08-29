@@ -5,12 +5,14 @@ Ini merupakan custom laravel package yang telah tersusun dan terstandarisasi.
 ## Instalasi
 1. Buka terminal bash/command prompt;
 2. Jalankan perintah `composer install` untuk mengunduh package yang dibutuhkan;
-3. Jalankan perintah `php artisan key:generate` untuk generate Application Key;
-4. Mulai Konfigurasikan Environment database,mail server dll  pada file `.env`
-5. Jalankan perintah `php artisan migrate` untuk melakukan migrasi table ke database;
-6. Mulai Konfigurasi yang diperlukan pada file `core/Config/fanrbac.php` ;
-7. Jalankan perintah `php artisan db:seed`;
-8. Selesai.
+3. Jalankan perintah `cp .env.example .env` untuk menduplikat file .env.example menjadi .env
+4. Jalankan perintah `php artisan key:generate` untuk generate Application Key;
+5. Mulai Konfigurasikan Environment database,mail server dll  pada file `.env`;
+6. **Opsional**: Untuk pengguna MariaDB, buka file `core/Config/database.php` dan konfigurasikan *charset* menjadi `utf8` dan *collation* menjadi `utf8_unicode_ci`;
+7. Jalankan perintah `php artisan migrate` untuk melakukan migrasi table ke database;
+8. Mulai Konfigurasi yang diperlukan pada file `core/Config/fanrbac.php` ;
+9. Jalankan perintah `php artisan db:seed`;
+10. Selesai.
 
 ## Fitur
 1. Authorization Scaffolding
