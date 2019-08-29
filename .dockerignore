@@ -1,5 +1,3 @@
 .git
-.env
-/vendor/*
 /storage/*.key
 /public/storage

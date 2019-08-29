@@ -48,18 +48,18 @@ return [
             'children' => [
                 [
                     'label' => 'User Management',
-                    'type' => 'URL',
-                    'data' => '#user-management',
+                    'type' => 'ROUTE_ACTION',
+                    'data' => 'Admin\UserManageController@index',
                     'icon' => 'fa fa-circle-o',
                 ], [
                     'label' => 'Role Management',
-                    'type' => 'URL',
-                    'data' => '#role-management',
+                    'type' => 'ROUTE_ACTION',
+                    'data' => 'Admin\RoleManageController@index',
                     'icon' => 'fa fa-circle-o'
                 ], [
                     'label' => 'Menu Management',
-                    'type' => 'URL',
-                    'data' => '#menu-management',
+                    'type' => 'ROUTE_ACTION',
+                    'data' => 'Admin\MenuManageController@index',
                     'icon' => 'fa fa-circle-o'
                 ]
             ]
