@@ -14,6 +14,10 @@ Ini merupakan custom laravel package yang telah tersusun dan terstandarisasi.
 9. Jalankan perintah `php artisan db:seed`;
 10. Selesai.
 
+## Memulai
+1. Jalankan perintah `npm build` **Hanya 1x saja**
+2. Jalankan perintah `npm run watch`
+
 ## Fitur
 1. Authorization Scaffolding
 2. RBAC (Role Base Account Control)
@@ -23,3 +27,4 @@ Ini merupakan custom laravel package yang telah tersusun dan terstandarisasi.
 6. User Management
 7. Role Management
 8. Menu Management
+9. **New** Auto Reload
