@@ -10,3 +10,16 @@ div.modal-body p.modal-message {
 button.btn.btn-danger.okay {
     border: solid 1.5px;
 }
+
+.sidebar-menu>li {
+    white-space: normal;
+}
+
+.sidebar-menu>li a i {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.sidebar-menu>li a span {
+    display: table-cell;
+}
