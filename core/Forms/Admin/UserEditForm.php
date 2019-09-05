@@ -5,13 +5,15 @@ namespace Fanintek\Fantasena\Forms\Admin;
 use Kris\LaravelFormBuilder\Field;
 use Kris\LaravelFormBuilder\Form;
 
+use Spatie\Permission\Models\Role;
+
 class UserEditForm extends Form
 {
     public function buildForm()
     {
         $roles = [];
-        foreach(config('fanrbac.roles') as $role) {
-            $roles[$role] = $role;
+        foreach(Role::all()->toArray() as $role) {
+            $roles[$role['name']] = $role['name'];
         }
 
         $this

@@ -67,3 +67,15 @@ if (!function_exists('buildAction')) {
 ACTION;
     }
 }
+
+if (!function_exists('is_routeActionExists')) {
+    function is_routeActionExists($route_action) {
+        try {
+            action($route_action);
+        } catch(\Exception $e) {
+            return false;
+        }
+
+        return true;
+    }
+}

@@ -3,6 +3,7 @@
 namespace Fanintek\Fantasena\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Route;
 use Fanintek\Fantasena\Http\Controllers\Controller;
 
 use Fanintek\Fantasena\Models\FanMenu;
@@ -80,8 +81,12 @@ class MenuManageController extends Controller
         {
             if (!$formMenu->isValid())
                 return redirect()->back()->withErrors($formMenu->getErrors())->withInput();
-
+            
             $data = $formMenu->getFieldValues();
+
+            if (($data['menu_link_type'] === 'ROUTE_NAME' && Route::has($data['menu_data']) == false) || ($data['menu_link_type'] === 'ROUTE_ACTION' && is_routeActionExists($data['menu_data']) == false) )
+                    return redirect()->back()->with('splash-type', 'danger')->with('splash-message', 'Route name or action was not found on routes, please double check!')->withInput(); 
+
             $data['granted_to'] = json_encode(['roles' => $data['granted_to'], 'users' => []]);
                 
             $menu = $this->model->create($data);
@@ -117,6 +122,10 @@ class MenuManageController extends Controller
                     return redirect()->back()->withErrors($formMenu->getErrors())->withInput();
 
                 $field = $formMenu->getFieldValues();
+
+                if (($field['menu_link_type'] === 'ROUTE_NAME' && Route::has($field['menu_data']) == false) || ($field['menu_link_type'] === 'ROUTE_ACTION' && is_routeActionExists($field['menu_data']) == false) )
+                    return redirect()->back()->with('splash-type', 'danger')->with('splash-message', 'Route name or action was not found on routes, please double check!')->withInput(); 
+
                 $field['granted_to'] = json_encode(['roles' => $field['granted_to'], 'users' => []]);
 
                 foreach ($field as $key => $value) {
