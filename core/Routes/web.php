@@ -19,5 +19,11 @@ Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::get('home', 'HomeController@index')->name('home');
-    Route::match(['get', 'post'], 'profile', 'HomeController@profile')->name('profile');
+    
+    Route::group(['prefix' => 'profile'], function() {
+        Route::get('/', 'HomeController@profile')->name('profile');
+
+        Route::post('changePassword', 'HomeController@changePassword')->name('change-password');
+        Route::post('changeProfile', 'HomeController@changeProfile')->name('change-profile');
+    });
 });
