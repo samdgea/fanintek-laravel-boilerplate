@@ -11,10 +11,13 @@ class RBACMenu extends Seeder
 
     protected $fanMenu;
 
+    protected $driver;
+
     public function __construct()
     {
         $this->command = new Command;
         $this->fanMenu = new FanMenu;
+        $this->driver  = \DB::connection()->getPDO()->getAttribute(PDO::ATTR_DRIVER_NAME);
     }
 
     /**
@@ -27,9 +30,9 @@ class RBACMenu extends Seeder
         $start = microtime(true);
 
         // Truncate Datas
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if ($this->driver == "mysql") DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table($this->fanMenu->getTable())->truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        if ($this->driver == "mysql") DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $menus = config('fanrbac.menus');
         

@@ -12,10 +12,13 @@ class UserTableSeeder extends Seeder
 
     protected $user;
 
+    protected $driver;
+
     public function __construct()
     {
-        $this->command = new Command;
-        $this->user = new User;
+        $this->command  = new Command;
+        $this->user     = new User;
+        $this->driver   = \DB::connection()->getPDO()->getAttribute(PDO::ATTR_DRIVER_NAME);
     }
 
     /**
@@ -28,9 +31,9 @@ class UserTableSeeder extends Seeder
         $start = microtime(true);
 
         // Truncate Datas
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if ($this->driver == "mysql") DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table($this->user->getTable())->truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        if ($this->driver == "mysql") DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $users = config('fanrbac.users');
 

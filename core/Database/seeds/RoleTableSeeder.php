@@ -11,10 +11,13 @@ class RoleTableSeeder extends Seeder
 
     protected $role;
 
+    protected $driver;
+
     public function __construct()
     {
-        $this->command = new Command;
-        $this->role = new Role;
+        $this->command  = new Command;
+        $this->role     = new Role;
+        $this->driver   = \DB::connection()->getPDO()->getAttribute(PDO::ATTR_DRIVER_NAME);
     }
 
     /**
@@ -27,9 +30,9 @@ class RoleTableSeeder extends Seeder
         $start = microtime(true);
 
         // Truncate Datas
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if ($this->driver == "mysql") DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table($this->role->getTable())->truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        if ($this->driver == "mysql") DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $roles = config('fanrbac.roles');
         

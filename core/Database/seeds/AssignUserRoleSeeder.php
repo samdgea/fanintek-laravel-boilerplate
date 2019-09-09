@@ -10,9 +10,12 @@ class AssignUserRoleSeeder extends Seeder
 {
     protected $command;
 
+    protected $driver;
+
     public function __construct()
     {
         $this->command = new Command;
+        $this->driver  = \DB::connection()->getPDO()->getAttribute(PDO::ATTR_DRIVER_NAME);
     }
 
     /**
@@ -25,9 +28,9 @@ class AssignUserRoleSeeder extends Seeder
         $start = microtime(true);
 
         // Truncate Datas
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if ($this->driver == "mysql") DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table(config('permission.table_names.model_has_permissions'))->truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        if ($this->driver == "mysql") DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         
         $assigns = config('fanrbac.assign_user_role');
 

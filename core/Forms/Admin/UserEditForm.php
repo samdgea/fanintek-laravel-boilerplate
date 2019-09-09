@@ -11,10 +11,7 @@ class UserEditForm extends Form
 {
     public function buildForm()
     {
-        $roles = [];
-        foreach(Role::all()->toArray() as $role) {
-            $roles[$role['name']] = $role['name'];
-        }
+        $roles = Role::pluck('name', 'name')->toArray();
 
         $this
             ->add('first_name', Field::TEXT, [
